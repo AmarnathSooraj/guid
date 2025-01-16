@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CalGo | Parking</title>
+    <link rel="stylesheet" href="travel.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-routing-machine/dist/leaflet-routing-machine.js"></script>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <h2>Have a Great Day</h2>
+        
+        <section class="maparea">
+            <div id="map"></div>
+            <script>
+                // Initialize the map and set view to Kozhikode
+                const map = L.map("map").setView([11.2588, 75.7804], 13);
+
+                // Add OpenStreetMap tile layer
+                L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                // Define the coordinates of the places
+                var Mananchira = [11.254303058423664, 75.7763345702988];
+                var SMStreet = [11.2509936872768, 75.7815499667997];
+                var MishkalMosque = [11.245852922881678, 75.77618715330644];
+                var KozhikodeBeach = [11.262967552849906, 75.76735668756531];
+                var KallaiPuzha = [11.237856168588669, 75.78684415566947];
+
+                // Add markers for each place
+                L.marker(Mananchira).addTo(map).bindPopup("Mananchira");
+                L.marker(SMStreet).addTo(map).bindPopup("SM Street");
+                L.marker(MishkalMosque).addTo(map).bindPopup("Mishkal Mosque");
+                L.marker(KozhikodeBeach).addTo(map).bindPopup("Kozhikode Beach");
+                L.marker(KallaiPuzha).addTo(map).bindPopup("Kallai Puzha");
+
+                // Create the route control and add waypoints
+                var control = L.Routing.control({
+                waypoints: [
+                        L.latLng(Mananchira),  // Starting point
+                        L.latLng(SMStreet),
+                        L.latLng(MishkalMosque),    
+                        L.latLng(KozhikodeBeach),
+                        L.latLng(KallaiPuzha) // Destination
+                ],
+                routeWhileDragging: true, // Enable dragging for the route
+                createMarker: function() { return null; } // Hide route markers
+                }).addTo(map);
+
+            </script>
+        </section>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 CalGo. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
